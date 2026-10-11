@@ -59,6 +59,18 @@ const server = http.createServer((req, res) => {
     // console.log(req.url);
     const { query, pathname } = url.parse(req.url, true);
 
+    // adding CSS
+    if (pathname === '/style.css') {
+        res.writeHead(200, { 'Content-Type': 'text/css' });
+
+        const css = fs.readFileSync(
+            `${__dirname}/templates/style.css`,
+            'utf-8'
+        );
+
+        return res.end(css);
+    }
+
     // routing 
     // overview page
     if (pathname === '/' || pathname === '/overview') {
